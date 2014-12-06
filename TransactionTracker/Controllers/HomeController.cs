@@ -1,15 +1,21 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.Web.Mvc;
+﻿using System.Web.Mvc;
+using Application_Logic.Transaction;
+using Ninject;
 
 namespace TransactionTracker.Controllers
 {
     public class HomeController : Controller
     {
+        private readonly ITransactionLogic transactionLogic;
+
+        public HomeController(ITransactionLogic transactionLogic)
+        {
+            this.transactionLogic = transactionLogic;
+        }
+
         public ActionResult Index()
         {
+            transactionLogic.TestTransaction();
             return View();
         }
 
