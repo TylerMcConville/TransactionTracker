@@ -9,7 +9,7 @@ namespace TransactionTracker
         public override void Load()
         {
             Bind<ITransactionLogic>().To<TransactionLogic>();
-            Bind<ITransactionServiceDataAccess>().To<TransactionServiceDataAccess>();
+            Bind<ITransactionDataAccess>().To<TransactionDataAccess>();
         }
     }
 }

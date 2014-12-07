@@ -1,6 +1,6 @@
 ﻿namespace Data_Access.TransactionService
 {
-    public interface ITransactionServiceDataAccess
+    public interface ITransactionDataAccess
     {
         void TestTransaction();
     }

@@ -4,7 +4,7 @@ using System.Net.Http.Headers;
 
 namespace Data_Access.TransactionService
 {
-    public class TransactionServiceDataAccess : ITransactionServiceDataAccess
+    public class TransactionDataAccess : ITransactionDataAccess
     {
         public void TestTransaction()
         {

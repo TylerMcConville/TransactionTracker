@@ -4,9 +4,9 @@ namespace Application_Logic.Transaction
 {
     public class TransactionLogic : ITransactionLogic
     {
-        private readonly ITransactionServiceDataAccess transactionServiceDataAccess;
+        private readonly ITransactionDataAccess transactionServiceDataAccess;
 
-        public TransactionLogic(ITransactionServiceDataAccess transactionServiceDataAccess)
+        public TransactionLogic(ITransactionDataAccess transactionServiceDataAccess)
         {
             this.transactionServiceDataAccess = transactionServiceDataAccess;
         }
