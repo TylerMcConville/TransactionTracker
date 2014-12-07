@@ -1,7 +1,10 @@
-﻿namespace Data_Access.TransactionService
+﻿using System.Collections.Generic;
+using Model.Transaction;
+
+namespace Data_Access.TransactionService
 {
     public interface ITransactionDataAccess
     {
-        void TestTransaction();
+        IEnumerable<Transaction> GetAllTransactions();
     }
 }

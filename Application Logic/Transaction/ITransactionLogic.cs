@@ -1,7 +1,9 @@
-﻿namespace Application_Logic.Transaction
+﻿using System.Collections.Generic;
+
+namespace Application_Logic.Transaction
 {
     public interface ITransactionLogic
     {
-        void TestTransaction();
+        IEnumerable<Model.Transaction.Transaction> GetAllTransactions();
     }
 }

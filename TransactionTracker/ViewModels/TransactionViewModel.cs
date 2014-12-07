@@ -1,10 +1,9 @@
-﻿namespace Model.Transaction
+﻿namespace TransactionTracker.ViewModels
 {
-    public class Transaction
+    public class TransactionViewModel
     {
-        //TODO add a TransactionDate property
-        public decimal Amount { get; set; }
         public string Description { get; set; }
+        public decimal Amount { get; set; }
         public bool WasPlanned { get; set; }
         public bool WasNecessary { get; set; }
     }

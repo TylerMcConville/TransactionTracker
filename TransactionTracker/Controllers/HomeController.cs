@@ -1,6 +1,6 @@
 ﻿using System.Web.Mvc;
 using Application_Logic.Transaction;
-using Ninject;
+using TransactionTracker.Extensions;
 
 namespace TransactionTracker.Controllers
 {
@@ -15,22 +15,8 @@ namespace TransactionTracker.Controllers
 
         public ActionResult Index()
         {
-            transactionLogic.TestTransaction();
-            return View();
-        }
-
-        public ActionResult About()
-        {
-            ViewBag.Message = "Your application description page.";
-
-            return View();
-        }
-
-        public ActionResult Contact()
-        {
-            ViewBag.Message = "Your contact page.";
-
-            return View();
+            var transactions = transactionLogic.GetAllTransactions();
+            return View(transactions.ToTransactionViewModels());
         }
     }
 }

@@ -1,12 +1,16 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Net.Http;
 using System.Net.Http.Headers;
+using System.Web.Script.Serialization;
+using Model.Exceptions;
+using Model.Transaction;
 
 namespace Data_Access.TransactionService
 {
     public class TransactionDataAccess : ITransactionDataAccess
     {
-        public void TestTransaction()
+        public IEnumerable<Transaction> GetAllTransactions()
         {
             using (var client = new HttpClient())
             {
@@ -14,15 +18,18 @@ namespace Data_Access.TransactionService
                 client.DefaultRequestHeaders.Accept.Clear();
                 client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
 
-                var response = client.GetAsync("api/transactions/0").Result;
+                var response = client.GetAsync("api/transactions/").Result;
 
-
-                if (response.IsSuccessStatusCode)
+                if (response.IsSuccessStatusCode == false)
                 {
-                    Object o = response.Content.ReadAsStringAsync().Result;
+                    //TODO catch this in the presentation layer
+                    throw new ReadTransactionsException();
                 }
 
-                Console.WriteLine(response);
+                var JSONResult = response.Content.ReadAsStringAsync().Result;
+                var jsSerializer = new JavaScriptSerializer();
+                var transactions = jsSerializer.Deserialize<List<Transaction>>(JSONResult);
+                return transactions;
             }
         }
     }

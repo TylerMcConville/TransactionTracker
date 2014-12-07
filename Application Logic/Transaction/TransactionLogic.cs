@@ -1,19 +1,20 @@
-﻿using Data_Access.TransactionService;
+﻿using System.Collections.Generic;
+using Data_Access.TransactionService;
 
 namespace Application_Logic.Transaction
 {
     public class TransactionLogic : ITransactionLogic
     {
-        private readonly ITransactionDataAccess transactionServiceDataAccess;
+        private readonly ITransactionDataAccess transactionDataAccess;
 
-        public TransactionLogic(ITransactionDataAccess transactionServiceDataAccess)
+        public TransactionLogic(ITransactionDataAccess transactionDataAccess)
         {
-            this.transactionServiceDataAccess = transactionServiceDataAccess;
+            this.transactionDataAccess = transactionDataAccess;
         }
 
-        public void TestTransaction()
+        public IEnumerable<Model.Transaction.Transaction> GetAllTransactions()
         {
-            transactionServiceDataAccess.TestTransaction();
+            return transactionDataAccess.GetAllTransactions();
         }
     }
 }
