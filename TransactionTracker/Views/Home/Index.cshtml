@@ -17,6 +17,8 @@
                     <th>Description</th>
                     <th>Was this transaction planned?</th>
                     <th>Was this transaction necessary?</th>
+                    <!-- The extra th is here so the "Create Transaction" button can be in the same row as the inputs
+                        ...and because I'm bad at designing things -->
                     <th></th>
                 </tr>
             </thead>
@@ -42,15 +44,19 @@
                     </tr>
                 }
             <tr>
-                <!-- TODO change this to an EditorFor so we can use TextBoxFor/CheckBoxFor-->
                 @using (Html.BeginForm("CreateTransaction", "Home"))
                 {
                     <td>
-                        @Html.TextBox("Amount")
+                        <div class="input-group">
+                            @Html.TextBox("Amount", string.Empty, new {@class = "form-control", @placeholder = "Amount"})
+                        </div>
+                        
                     </td>
                     <td>
-                        @Html.TextBox("Description")
+                        @Html.TextBox("Description", string.Empty, new {@class = "form-control", @placeholder = "Description"})
                     </td>
+                    
+                    <!-- TODO find a more visually appealing way to do these checkboxes. Maybe use JS to toggle between a Yes/No button?-->
                     <td>
                         @Html.CheckBox("WasPlanned")
                     </td>
