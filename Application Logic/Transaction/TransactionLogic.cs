@@ -16,5 +16,10 @@ namespace Application_Logic.Transaction
         {
             return transactionDataAccess.GetAllTransactions();
         }
+
+        public void CreateTransaction(Model.Transaction.Transaction transaction)
+        {
+            transactionDataAccess.CreateTransaction(transaction);
+        }
     }
 }
