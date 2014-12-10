@@ -37,3 +37,5 @@ Future improvements:
 -Look into using Dapper
 
 -Remove spaces/underscores from project names. Not sure what I was thinking there
+
+-Fix namespaces so I don't have to fully qualify class names (see TransactionLogic.cs - fully typing "Model.Transaction.Transaction" is silly)
