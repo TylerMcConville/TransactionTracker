@@ -18,9 +18,9 @@ namespace TransactionTracker.Extensions
             };
         }
 
-        public static IEnumerable<TransactionViewModel> ToTransactionViewModels(this IEnumerable<Transaction> source)
+        public static IList<TransactionViewModel> ToTransactionViewModels(this IList<Transaction> source)
         {
-            return source.Select(x => x.ToTransactionViewModel());
+            return source.Select(x => x.ToTransactionViewModel()).ToList();
         }
     }
 }

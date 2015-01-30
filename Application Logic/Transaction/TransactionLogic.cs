@@ -12,7 +12,7 @@ namespace Application_Logic.Transaction
             this.transactionDataAccess = transactionDataAccess;
         }
 
-        public IEnumerable<Model.Transaction.Transaction> GetAllTransactions()
+        public IList<Model.Transaction.Transaction> GetAllTransactions()
         {
             return transactionDataAccess.GetAllTransactions();
         }

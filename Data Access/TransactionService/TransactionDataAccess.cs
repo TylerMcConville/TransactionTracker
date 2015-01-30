@@ -1,53 +1,40 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Net.Http;
-using System.Net.Http.Headers;
-using Model.Exceptions;
-using Model.Transaction;
+﻿using System.Collections.Generic;
+using System.Linq;
+using Data_Access.DataHelpers;
+using Transaction = Model.Transaction.Transaction;
 
 namespace Data_Access.TransactionService
 {
     public class TransactionDataAccess : ITransactionDataAccess
     {
-        public IEnumerable<Transaction> GetAllTransactions()
+        public IList<Transaction> GetAllTransactions()
         {
-            using (var client = new HttpClient())
+            using (var context = new TransactionTrackerDataContext())
             {
-                SetHttpClientParameters(client);
-
-                var response = client.GetAsync("api/transactions/").Result;
-
-                if (response.IsSuccessStatusCode == false)
+                return context.Transactions.Select(x => new Transaction
                 {
-                    //TODO catch this in the presentation layer
-                    throw new ReadTransactionsException();
-                }
-
-                return response.Content.ReadAsAsync<IEnumerable<Transaction>>().Result;
+                    Amount = x.Amount,
+                    Description = x.Description,
+                    WasNecessary = x.WasNecessary,
+                    WasPlanned = x.WasPlanned
+                }).ToList();
             }
         }
 
         public void CreateTransaction(Transaction transaction)
         {
-            using (var client = new HttpClient())
+            using (var context = new TransactionTrackerDataContext())
             {
-                SetHttpClientParameters(client);
-
-                var response = client.PostAsJsonAsync("api/transactions/", transaction).Result;
-
-                if (response.IsSuccessStatusCode == false)
+                context.Transactions.InsertOnSubmit(new DataHelpers.Transaction
                 {
-                    //TODO catch this in the presentation layer
-                    throw new CreateTransactionException();
-                }
-            }
-        }
+                    Amount = transaction.Amount,
+                    Description = transaction.Description,
+                    WasNecessary = transaction.WasNecessary,
+                    WasPlanned = transaction.WasPlanned
+                });
 
-        private static void SetHttpClientParameters(HttpClient httpClient)
-        {
-            httpClient.BaseAddress = new Uri(Constants.TransactionServiceURI);
-            httpClient.DefaultRequestHeaders.Accept.Clear();
-            httpClient.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));   
+                context.SubmitChanges();
+            }
         }
     }
 }

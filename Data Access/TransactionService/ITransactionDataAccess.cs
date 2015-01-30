@@ -5,7 +5,7 @@ namespace Data_Access.TransactionService
 {
     public interface ITransactionDataAccess
     {
-        IEnumerable<Transaction> GetAllTransactions();
+        IList<Transaction> GetAllTransactions();
         void CreateTransaction(Transaction transaction);
     }
 }
