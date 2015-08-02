@@ -1,7 +1,7 @@
 TransactionTracker - using Transaction Service (by Tyler McConville)
 
 
-
+8/1/2015 These instructions are a bit out of date. You no longer need to pull down the TransactionService (everything should be located in TransactionTracker now).
 INSTRUCTIONS TO RUN:
 1. Pull down/clone both TransactionTracker and TransactionService
 2. Open the TransactionService solution in Visual Studio, and click "Run", "Debug", or "Attach"
